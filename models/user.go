@@ -12,6 +12,7 @@ type User struct {
 	Created_UID uint      `json:"created_uid"`
 	Updated_UID uint      `json:"updated_uid"`
 	UserName    string    `json:"username"`
+	Email       string    `json:"email"`
 	Password    string    `json:"password"`
 	Phone       string    `json:"phone"`
 	MainPhoto   string    `json:"main_photo"`

@@ -31,3 +31,16 @@ func (s *serviceImpl) GetAll(c echo.Context) ([]auth.UserResponseDTO, error) {
 
 	return userRes, nil
 }
+
+func (s *serviceImpl) GetUserByID(c echo.Context, id uint) (auth.UserResponseDTO, error) {
+	var userRes auth.UserResponseDTO
+
+	result, err := s.Repository.GetUserByID(c, *s.DB, id)
+	if err != nil {
+		return userRes, err
+	}
+
+	user := result.ToResponse()
+
+	return user, nil
+}
