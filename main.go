@@ -2,6 +2,7 @@ package main
 
 import (
 	"realtime/pkg/database"
+	"realtime/routes"
 
 	"github.com/labstack/echo/v4"
 )
@@ -13,5 +14,7 @@ func main() {
 	database.Init("postgresql")
 	database.Migrate()
 
-	e.Start(":1234")
+	routes.RouteInit(e.Group("api"))
+
+	e.Logger.Fatal(e.Start(":" + database.Get("APP_PORT")))
 }

@@ -13,7 +13,7 @@ type serviceImpl struct {
 	Repository repository.Repository
 }
 
-func NewService() Service {
+func NewService(DB *gorm.DB, repository repository.Repository) Service {
 	return &serviceImpl{}
 }
 
