@@ -33,12 +33,12 @@ func NewController(Service service.Service) Controller {
 }
 
 func (co *controllerImpl) GetAll(c echo.Context) error {
-	result, err := co.Service.GetAll(c)
-	if err != nil {
-		return err
-	}
+    result, err := co.Service.GetAll(c)
+    if err != nil {
+        return err
+    }
 
-	return response.SuccessResponse(c, http.StatusOK, "Success Get All User Chatin'g", result)
+    return response.SuccessResponse(c, http.StatusOK, "Success Get All User Chatin'g", result)
 }
 
 func (co *controllerImpl) GetUserByID(c echo.Context) error {

@@ -25,7 +25,7 @@ func UserHandler() *handlerUsers {
 func (h *handlerUsers) Route(g *echo.Group) {
 	g.GET("", h.Controller.GetAll)
 	g.GET("/:id", h.Controller.GetUserByID)
-	g.GET("", controller.CreateUser)
+	g.POST("", controller.CreateUser)
 	g.PUT("/:id", controller.UpdateUser)
 	g.DELETE("/:id", controller.DeleteUser)
 }

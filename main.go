@@ -14,7 +14,7 @@ func main() {
 	database.Init("postgresql")
 	database.Migrate()
 
-	routes.RouteInit(e.Group("api"))
+	routes.RouteInit(e.Group("api/v1"))
 
 	e.Logger.Fatal(e.Start(":" + database.Get("APP_PORT")))
 }

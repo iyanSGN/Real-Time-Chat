@@ -17,14 +17,14 @@ func NewRepository() Repository {
 	return &repositoryImpl{}
 }
 
-func (r *repositoryImpl) GetAll(c echo.Context, DB gorm.DB) ([]models.User, error) {
-	var user []models.User
+func (r *repositoryImpl) GetAll(c echo.Context, DB *gorm.DB) ([]models.User, error) {
+    var users []models.User
 
-	if err := DB.Find(&user).Error; err != nil {
-		return user, err
-	}
+    if err := DB.Find(&users).Error; err != nil {
+        return nil, err
+    }
 
-	return user, nil
+    return users, nil
 }
 
 func (r *repositoryImpl) GetUserByID(c echo.Context, DB gorm.DB, id uint) (models.User, error) {

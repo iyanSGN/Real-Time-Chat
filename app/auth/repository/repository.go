@@ -8,7 +8,7 @@ import (
 )
 
 type Repository interface {
-	GetAll(c echo.Context, DB gorm.DB) ([]models.User, error)
+	GetAll(c echo.Context, DB *gorm.DB) ([]models.User, error)
 	GetUserByID(c echo.Context, DB gorm.DB, id uint) (models.User, error)
 
 }
