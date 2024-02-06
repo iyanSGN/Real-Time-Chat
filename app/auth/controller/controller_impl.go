@@ -17,6 +17,7 @@ import (
 	helpers "realtime/pkg/helper"
 	"realtime/pkg/response"
 	"strconv"
+	"strings"
 
 	"github.com/labstack/echo/v4"
 	"github.com/nfnt/resize"
@@ -130,10 +131,11 @@ func CreateUser(c echo.Context) error {
 			})
 		}
 
-		base64Image = base64.StdEncoding.EncodeToString(resizedImgBuffer.Bytes())
+		ext := filepath.Ext(file.Filename)
+		base64Image = strings.TrimSuffix(data.Name, filepath.Ext(data.Name)) + ext
 	}
 
-	createdUser, err := repository.CreateUser(data, base64Image)
+	_, err = repository.CreateUser(data, base64Image)
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, map[string]interface{}{
 			"message":     "Failed to create user",
@@ -141,8 +143,6 @@ func CreateUser(c echo.Context) error {
 			"status_code": http.StatusInternalServerError,
 		})
 	}
-
-	fmt.Println(createdUser)
 
 	return c.JSON(http.StatusCreated, map[string]interface{}{
 		"message":     "User created successfully",
@@ -239,8 +239,6 @@ func UpdateUser(c echo.Context) error {
 		}
 
 		base64Image = base64.StdEncoding.EncodeToString(resizedImgBuffer.Bytes())
-
-		fmt.Println(userUpdate)
 
 		err = repository.UpdateUser(userUpdate, base64Image, uint(id))
 		if err != nil {
