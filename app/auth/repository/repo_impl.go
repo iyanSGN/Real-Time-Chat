@@ -44,6 +44,7 @@ func CreateUser(req auth.UserRequest, mainPhoto string) (auth.UserRequest, error
 
 	user := models.User{
 		UserName: req.Name,
+		Email: req.Email,
 		Password: req.Password,
 		Phone: req.Phone,
 		MainPhoto: mainPhoto,
@@ -78,13 +79,14 @@ func UpdateUser(req auth.UserRequest, mainPhoto string, id uint) ( error) {
 		user.Email = req.Email
 	}
 
-	if req.Phone != "" {
-		user.Phone = req.Phone
+	if mainPhoto != "" {
+		user.MainPhoto = mainPhoto
 	}
+
 
 	updatedUser := db.Save(&user)
 	if updatedUser != nil {
-		return fmt.Errorf("error updating user: %w", updatedUser.Error)
+		return updatedUser.Error
 	}
 
 	return nil
